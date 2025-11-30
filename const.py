@@ -1,0 +1,1 @@
+DATA = '/home/ilia/Data/manufacturing_use_case'

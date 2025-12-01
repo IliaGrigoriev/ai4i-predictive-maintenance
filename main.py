@@ -6,26 +6,6 @@ from const import DATA
 from eda            import EDA
 from feature_impact import FeatureImpactAnalysis
 
-'''
-
-(1) inspect distributions of each feature
-(2) compare feature distributions for failure vs non-failure
-(3) check correlations
-(4) look for obvious thresholds (e.g., failures occur mostly above 310 K process temp)
-(5) identify outliers or data-quality issues
-
-'''
-
-'''
-(1)
-
-Because these metrics let you understand the shape, center, and spread of each feature's 
-distribution in a way that is simple, interpretable, and statistically meaningful. They 
-form the minimal set needed to answer whether failures occur under different operating 
-conditions.
-
-'''
-
 # Preprocess: 
 # -- Get normal and failures
 # -- Convert string features to numeric values 

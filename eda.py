@@ -81,7 +81,7 @@ class EDA:
         Xf = x_fail.reshape(-1, 1)
         Xn = x_norm.reshape(-1, 1)
 
-        # fit KDEs
+        # fit
         kde_f = KernelDensity(bandwidth=bandwidth).fit(Xf)
         kde_n = KernelDensity(bandwidth=bandwidth).fit(Xn)
 
@@ -167,7 +167,7 @@ class EDA:
         sns.violinplot(
             data=tmp,
             x="Condition",
-            hue="Condition",           # REQUIRED to avoid future warnings
+            hue="Condition",           # avoids future warnings
             y=feature_name,
             inner="box",   # adds a small boxplot inside the violin
             cut=0,         # avoids extending beyond min/max data
@@ -179,14 +179,12 @@ class EDA:
         plt.xlabel("Condition")
         plt.ylabel(feature_name)
 
-        # (Optional) same legend style as KDE / Gaussian, if you already have it
         y_offset = -0.18
         plt.figtext(0.22, y_offset, "Normal",
                     ha="left", fontsize=16, fontweight="bold", color="tab:blue")
         plt.figtext(0.62, y_offset, "Failure",
                     ha="left", fontsize=16, fontweight="bold", color="tab:orange")
 
-        # 3) Add D metric under the plot (like for KDE)
         plt.figtext(
             0.5,
             -0.28,
@@ -238,7 +236,7 @@ class EDA:
         plt.xlabel(feature_name)
         plt.ylabel("Density")
 
-        # Color-coded legend labels below the x-axis (consistent with KDE/violin)
+        # Color-coded legend labels
         y_offset = -0.18
         plt.figtext(
             0.22,

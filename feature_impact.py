@@ -16,7 +16,7 @@ class FeatureImpactAnalysis:
         X = features_numeric[features]
         y = features_numeric["Target"]
 
-        # Train/test split (stratified)
+        # Train/test split
         X_train, X_test, y_train, y_test = train_test_split(
             X,
             y,
@@ -25,7 +25,7 @@ class FeatureImpactAnalysis:
             stratify=y
         )
 
-        # Train Random Forest
+        # Training
         rf = RandomForestClassifier(
             n_estimators = 200,
             random_state = 42,
@@ -56,10 +56,9 @@ class FeatureImpactAnalysis:
         )
         print(fi)
 
-        # Optional: save feature impact to CSV for slides
         fi.to_csv("feature_impact.csv", index = False, sep = ";")
 
-        # Apply model to ALL 10 000 points for reasoning
+        # All data for reasoning
         features_numeric["rf_pred"]         = rf.predict(X)
         features_numeric["rf_prob_failure"] = rf.predict_proba(X)[:, 1]
 
@@ -72,9 +71,6 @@ class FeatureImpactAnalysis:
     # --------------------------------------------------------------------------------
     def permutation_importance(self, rf, X_test, y_test, features):
         from sklearn.inspection import permutation_importance
-
-        # Assuming following input is there:
-        # rf, X_train, X_test, y_train, y_test, features
 
         # (1) Compute permutation importance on the test set
         result = permutation_importance(

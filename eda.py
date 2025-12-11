@@ -53,13 +53,12 @@ class EDA:
                     "Median (normal)":  round(normal[col].median(), 1),
                     "Median (failure)": round(failures[col].median(), 1),
 
+
                     "std (normal)":  round(normal[col].std(), 1),
                     "std (failure)": round(failures[col].std(), 1),
 
-                    "p10 (normal)":  round(normal[col].quantile(0.10), 1),
-                    "p10 (failure)": round(failures[col].quantile(0.10), 1),
-                    "p90 (normal)":  round(normal[col].quantile(0.90), 1),
-                    "p90 (failure)": round(failures[col].quantile(0.90), 1)
+                    "p90-p10 (normal)"   : round(normal[col].quantile(0.90) - normal[col].quantile(0.10), 1),
+                    "p90-p10 (faillure)" : round(failures[col].quantile(0.90) - failures[col].quantile(0.10), 1)
                }
                discriptive_analysis_table.append(row)
 
@@ -153,7 +152,6 @@ class EDA:
         x_norm = normal[feature_name].astype(float).values
         D_value = self._kde_l1_distance(x_fail, x_norm, bandwidth=0.5)
 
-        # 2) Your existing code (keep as is)
         tmp = pd.DataFrame({
             feature_name: pd.concat([normal[feature_name], failures[feature_name]]).astype(float),
             "Condition": (
